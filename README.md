@@ -1,12 +1,12 @@
-# 🎬 CineIQ – Movie & TV Series Trivia
+#  CineIQ – Movie & TV Series Trivia
 
 **Think you know movies and TV shows? Prove it.**
 
 CineIQ is an interactive movie and television trivia website designed for cinema enthusiasts and hardcore fans. It challenges users with questions across multiple genres, covering everything from iconic films and popular TV series to complex storylines, philosophical concepts, directors, and cinematic knowledge.
 
-🌐 **Live Website:** https://cineiqtriviawebsite.vercel.app/
+ **Live Website:** https://cineiqtriviawebsite.vercel.app/
 
-## ✨ Features
+##  Features
 
 - **Multiple Genres:** Explore Fantasy, Sci-Fi, Action, Horror, Comedy, and Romance.
 - **Movie & TV Series Trivia:** Questions covering both cinema and television.
@@ -15,7 +15,7 @@ CineIQ is an interactive movie and television trivia website designed for cinema
 - **Genre-Based Challenges:** Explore different categories and test your knowledge.
 - **Dark-Themed Interface:** A cinematic design created for an immersive experience.
 
-## 🎭 Trivia Categories
+##  Trivia Categories
 
 | Category | Description |
 |---|---|
@@ -26,13 +26,13 @@ CineIQ is an interactive movie and television trivia website designed for cinema
 | Comedy | Popular comedy films and television series |
 | Romance | Love stories, relationships, and romantic cinema |
 
-## 🛠️ Technologies Used
+##  Technologies Used
 
 - HTML5
 - CSS3
 - JavaScript
 
-## 🚀 Getting Started
+##  Getting Started
 
 You can run CineIQ locally by following these steps:
 
@@ -52,13 +52,13 @@ You can run CineIQ locally by following these steps:
 
 No additional dependencies or installation are required for the static website.
 
-## 🌍 Deployment
+##  Deployment
 
 CineIQ is deployed using **Vercel**, with GitHub integration for version control and automatic deployments.
 
 Any changes pushed to the connected production branch can trigger a new deployment.
 
-## 🔮 Future Improvements
+##  Future Improvements
 
 - Expand the trivia question database.
 - Introduce additional movie and television categories.
@@ -66,7 +66,7 @@ Any changes pushed to the connected production branch can trigger a new deployme
 - Add new interactive quiz features.
 - Enhance mobile responsiveness and user experience.
 
-## 👨‍💻 Developer
+##  Developer
 
 **Uvindu Kumarage**
 
