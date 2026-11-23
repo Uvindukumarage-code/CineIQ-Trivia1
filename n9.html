@@ -1,0 +1,315 @@
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+        <title>About </title>
+    </head>
+    <style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.navibar {
+    font-family: 'Oswald', sans-serif;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 20px 50px;
+    background-color: rgba(11, 11, 13, 0.9); 
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+.navibar .logo {
+    font-size: 1.8rem;
+    color: #3028a5;
+}
+.logo a {
+    color: #3028a5;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.logo a:hover {
+    color: #ff4c4c;
+}
+.navi-links {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+}
+.navi-links a {
+    color: #3028a5;
+    text-decoration: none;
+    transition: 0.3s;
+}
+.navi-links a:hover {
+    color: #ff4c4c;
+}
+
+            
+            .navi-links a {
+    color: #3028a5;
+    text-decoration: underline; 
+    transition: 0.3s;
+}
+       
+.dropdown {
+    position: relative;
+}
+
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: rgba(0,0,0,0.85);
+    padding: 10px 0;
+    list-style: none;
+    min-width: 150px;
+    z-index: 1000;
+}
+
+
+.dropdown-menu li a {
+    display: block;
+    padding: 8px 20px;
+    color: #3028a5;
+    text-decoration: underline;
+}
+
+.dropdown-menu li a:hover {
+    color: #ff4c4c;
+}
+
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+body {
+            font-family: 'Oswald', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            text-align: center;
+        }
+
+        body {
+    font-family: 'Oswald', sans-serif;
+    background-image: url('Leonardo_Phoenix_09_Wide_cinematic_movie_still_panoramic_view_2 (1).jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    padding-top: 120px; 
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 80px;
+        }
+
+         middle-box{
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 80px;
+
+         }
+
+
+         /* CINEIQ Footer */
+.footer {
+    background: #0b0b0d;
+    color: #fff;
+    padding: 40px 5%;
+    margin-top: 40px;
+    width: 100%;
+    font-family: 'Oswald', sans-serif;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 200px;
+}
+
+.footer-section h3 {
+    color: #3028a5;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.footer-section p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #ccc;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 8px;
+}
+
+.footer-section a {
+    color: #ccc;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer-section a:hover {
+    color: #ff4c4c;
+}
+
+.footer hr {
+    border: 0;
+    border-top: 1px solid #333;
+    margin: 30px 0 20px;
+}
+
+.footer-bottom {
+    text-align: center;
+    font-size: 13px;
+    color: #999;
+}
+
+/* Mobile footer */
+@media (max-width: 600px) {
+    .footer-container {
+        flex-direction: column;
+        gap: 25px;
+    }
+}
+
+.footer {
+    width: calc(100% + 40px);
+    margin-left: -20px;
+    margin-right: -20px;
+    box-sizing: border-box;
+}
+
+
+/* CINEIQ Navigation Logo */
+.navibar .logo img {
+    height: 42px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+}
+        </style>
+    <body>
+
+
+        <header>
+            <nav class="navibar">
+                <div class="logo">
+            <a href="n1.html">
+                <img src="cineiq-logo.png" alt="CINEIQ Logo">
+            </a>
+        </div>
+                <ul class="navi-links">
+                    <li class="dropdown">
+                    <a href="n22.html">Genre</a>
+                    <ul class="dropdown-menu">
+                    <li><a href="n333.html#Fantasy">Fantasy</a></li>
+                    <li><a href="n333.html#Sci-Fi">Sci-Fi</a></li>
+                    <li><a href="n333.html#Action">Action</a></li>
+                    <li><a href="n333.html#Horror">Horror</a></li>
+                    <li><a href="n333.html#Comedy">Comedy</a></li>
+                    <li><a href="n333.html#Romance">Romance</a></li>
+                </ul>
+            </li>
+                    <li><a href="n333.html">Quizzes</a></li>
+                    <li><a href="n8.html">Leaderboard</a></li>
+                    <li><a href="n7.html">Contact Us</a></li>
+                    <li><a href="n9.html">About</a></li>
+                </ul>
+            </nav>
+            <h2>About Us</h2>
+        </header>
+        <br><br><br><br>
+        <middle-box><h3> Welcome to CineIQ <br> A playful playground for cinephiles! <br>This site was created as part of our group assignment to blend creativity, coding, and a love for cinema into one interactive experience. Here, you can test your knowledge across multiple genres, challenge your friends, and discover new films, actors, and iconic moments. With a clean and modern interface, fun quizzes, and a competitive leaderboard, Movie Trivia Hub celebrates the magic of cinema while giving you an engaging and playful way to explore it. Whether you’re a casual viewer or a die-hard film fan, this is the place to prove your movie mastery and immerse yourself in the world of films.</h3></middle-box>
+       
+
+                      
+<!-- CINEIQ Footer -->
+<footer class="footer">
+
+    <div class="footer-container">
+
+        <!-- About -->
+        <div class="footer-section">
+            <h3>CINEIQ</h3>
+            <p>
+                CINEIQ is your destination for movie trivia,
+                exciting quizzes, and cinematic challenges.
+                Test your movie knowledge, compete with friends,
+                and prove you're the ultimate cinephile.
+            </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="n1.html">Home</a></li>
+                <li><a href="n22.html">Genres</a></li>
+                <li><a href="n333.html">Quizzes</a></li>
+                <li><a href="n8.html">Leaderboard</a></li>
+                <li><a href="n9.html">About</a></li>
+                <li><a href="n7.html">Contact</a></li>
+            </ul>
+        </div>
+
+        <!-- Legal -->
+        <div class="footer-section">
+            <h3>Legal</h3>
+            <ul>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms & Conditions</a></li>
+                <li><a href="#">Cookie Policy</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-section">
+            <h3>Contact Us</h3>
+            <p>Email: info@movietriviahub.com</p>
+            <p>Phone: +94 77 805 2038</p>
+        </div>
+
+    </div>
+
+    <hr>
+
+    <div class="footer-bottom">
+        &copy; 2026 CINEIQ. All Rights Reserved.
+    </div>
+
+</footer>
+            
+    
+    </body>
+    </html>

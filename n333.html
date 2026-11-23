@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CineIQ</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+    font-family: Arial, sans-serif;
+    color:white;
+    background-image: url('Leonardo_Phoenix_09_A_sleek_modern_dark_blue_abstract_backgrou_3.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    padding:20px;
+}
+.navibar {
+    font-family: 'Oswald', sans-serif;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:20px 50px; background-color: rgba(11, 11, 13, 0.9);
+    position: fixed; top:0; left:0; right:0; z-index:1000;
+}
+
+
+/* CINEIQ Navigation Logo */
+.navibar .logo img {
+    height: 42px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+}
+
+.navibar .logo { font-size:1.8rem; color:#3028a5; }
+.logo a { color:#3028a5; text-decoration:none; transition: color 0.3s; }
+.logo a:hover { color:#ff4c4c; }
+.navi-links { list-style:none; display:flex; gap:40px; }
+.navi-links a { color:#3028a5; text-decoration:underline; transition:0.3s; }
+.navi-links a:hover { color:#ff4c4c; }
+.dropdown { position: relative; }
+.dropdown-menu {
+    display:none; position:absolute; top:100%; left:0;
+    background-color: rgba(0,0,0,0.85); padding:10px 0;
+    list-style:none; min-width:150px; z-index:1000;
+}
+.dropdown:hover .dropdown-menu { display:block; }
+.dropdown-menu li a { display:block; padding:8px 20px; color:#3028a5; text-decoration:underline; }
+.dropdown-menu li a:hover { color:#ff4c4c; }
+main { padding-top:80px; }
+section { margin-bottom:60px; }
+.quiz-container {
+    max-width:600px; margin:auto; background:#1b263b;
+    padding:25px; border-radius:15px;
+    box-shadow:0 6px 15px rgba(0,0,0,0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.quiz-container:hover { transform:scale(1.05); box-shadow:0 12px 30px rgba(3,1,1,0.8); }
+h1 { text-align:center; margin-bottom:20px; font-weight:700; font-size:2rem; }
+.question { margin-bottom:20px; }
+.question h3 { font-weight:700; margin-bottom:12px; font-size:1.25rem; }
+label {
+    display:flex; align-items:center; background:#233554;
+    padding:12px 15px; border-radius:10px; margin-bottom:10px;
+    cursor:pointer; transition:background 0.3s ease, color 0.3s ease;
+    user-select:none; font-size:1rem; gap:10px;
+}
+input[type="radio"] { accent-color:#ff4c4c; cursor:pointer; flex-shrink:0; width:20px; height:20px; }
+label input[type="radio"] { margin-right:10px; }
+label:hover, input[type="radio"]:checked + label { background:#ff4c4c; color:white; }
+button {
+    width:100%; max-width:200px; margin:20px auto 0 auto; display:block;
+    background:#e63946; border-radius:8px; font-weight:700; font-size:1.1rem; color:white;
+    border:none; cursor:pointer; padding:12px 0; box-shadow:0 4px 10px rgba(230,57,70,0.7);
+    transition: background 0.3s ease;
+}
+button:hover { background:#d62828; }
+.result { margin-top:15px; font-size:1.2rem; font-weight:700; text-align:center; color:#ffbaba; user-select:none; }
+#scrollBtn {
+  position:fixed; bottom:20px; right:20px; z-index:99;
+  font-size:20px; width:45px; height:45px; border:none; outline:none;
+  background:white; color:#333; cursor:pointer; border-radius:50%;
+  box-shadow:0 4px 10px rgba(0,0,0,0.15); opacity:0; pointer-events:none;
+  transition: opacity 0.4s ease;
+}
+#scrollBtn.show { opacity:1; pointer-events:auto; }
+#scrollBtn:hover { background:#f5f5f5; transform:translateY(-3px); }
+@media(max-width:600px){
+    body { padding:10px; }
+    .navibar { padding:12px 20px; flex-direction:column; gap:10px; }
+    .navi-links { flex-wrap:wrap; justify-content:center; gap:15px; }
+    .quiz-container { padding:20px; max-width:100%; }
+    button { max-width:100%; }
+}
+
+/* CINEIQ Footer */
+.footer {
+    background: #0b0b0d;
+    color: #fff;
+    padding: 40px 5%;
+    margin-top: 40px;
+    width: 100%;
+    font-family: 'Oswald', sans-serif;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 200px;
+}
+
+.footer-section h3 {
+    color: #3028a5;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.footer-section p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #ccc;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 8px;
+}
+
+.footer-section a {
+    color: #ccc;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer-section a:hover {
+    color: #ff4c4c;
+}
+
+.footer hr {
+    border: 0;
+    border-top: 1px solid #333;
+    margin: 30px 0 20px;
+}
+
+.footer-bottom {
+    text-align: center;
+    font-size: 13px;
+    color: #999;
+}
+
+/* Mobile footer */
+@media (max-width: 600px) {
+    .footer-container {
+        flex-direction: column;
+        gap: 25px;
+    }
+}
+
+.footer {
+    width: calc(100% + 40px);
+    margin-left: -20px;
+    margin-right: -20px;
+    box-sizing: border-box;
+}
+
+
+/* Answer feedback after submitting a quiz */
+label.answer-correct {
+    background:#166534 !important;
+    color:#fff !important;
+    border:1px solid #22c55e;
+}
+label.answer-incorrect {
+    background:#991b1b !important;
+    color:#fff !important;
+    border:1px solid #ef4444;
+}
+label.answer-correct:hover,
+label.answer-incorrect:hover { filter:brightness(1.08); }
+
+/* Simple score-only results pop-up */
+#scoreModal {
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:2000;
+    background:rgba(0,0,0,0.78);
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+#scoreModal.show { display:flex; }
+.score-modal-content {
+    width:100%;
+    max-width:380px;
+    background:#1b263b;
+    border:1px solid #405575;
+    border-radius:16px;
+    padding:30px 24px;
+    text-align:center;
+    box-shadow:0 12px 35px rgba(0,0,0,0.55);
+}
+.score-modal-content h2 {
+    font-family:'Oswald',sans-serif;
+    font-size:1.8rem;
+    margin-bottom:12px;
+}
+#scoreMessage {
+    font-size:1.35rem;
+    font-weight:700;
+    color:#fff;
+}
+.score-modal-content button { margin-top:22px; }
+
+</style>
+</head>
+<body>
+<header>
+    <nav class="navibar">
+
+        <div class="logo">
+            <a href="n1.html">
+                <img src="cineiq-logo.png" alt="CINEIQ Logo">
+            </a>
+        </div>
+
+        <ul class="navi-links">
+            <li class="dropdown">
+                <a href="n22.html">Genre</a>
+
+                <ul class="dropdown-menu">
+                    <li><a href="#Fantasy">Fantasy</a></li>
+                    <li><a href="#Sci-Fi">Sci-Fi</a></li>
+                    <li><a href="#Action">Action</a></li>
+                    <li><a href="#Horror">Horror</a></li>
+                    <li><a href="#Comedy">Comedy</a></li>
+                    <li><a href="#Romance">Romance</a></li>
+                </ul>
+            </li>
+
+            <li><a href="n333.html">Quizzes</a></li>
+            <li><a href="n8.html">Leaderboard</a></li>
+            <li><a href="n7.html">Contact Us</a></li>
+            <li><a href="n9.html">About</a></li>
+        </ul>
+
+    </nav>
+</header>
+<br><br><br><br>
+
+
+<section id="Action">
+<h1>Action Quiz</h1>
+<div class="quiz-container">
+    <div class="question">
+        <h3>1. Who plays John Wick in the "John Wick" movie series?</h3>
+        <label><input type="radio" name="q1" value="a"> Tom Cruise</label>
+        <label><input type="radio" name="q1" value="b"> Keanu Reeves</label>
+        <label><input type="radio" name="q1" value="c"> Robert Downey Jr.</label>
+        <label><input type="radio" name="q1" value="d"> Chris Evans</label>
+    </div>
+    <div class="question">
+        <h3>2. Which superhero uses a shield as his primary weapon?</h3>
+        <label><input type="radio" name="q2" value="a"> Iron Man</label>
+        <label><input type="radio" name="q2" value="b"> Batman</label>
+        <label><input type="radio" name="q2" value="c"> Captain America</label>
+        <label><input type="radio" name="q2" value="d"> Thor</label>
+    </div>
+    <div class="question">
+        <h3>3. In the "Fast & Furious" series, what kind of cars are mostly featured?</h3>
+        <label><input type="radio" name="q3" value="a"> Trucks</label>
+        <label><input type="radio" name="q3" value="b"> Muscle cars</label>
+        <label><input type="radio" name="q3" value="c"> Motorcycles</label>
+        <label><input type="radio" name="q3" value="d"> Bicycles</label>
+    </div>
+    <div class="question">
+    <h3>4. In Heat (1995), which two legendary actors share their first on-screen scene together?</h3>
+    <label><input type="radio" name="q4" value="a"> Al Pacino and Robert De Niro</label>
+    <label><input type="radio" name="q4" value="b"> Val Kilmer and Robert De Niro</label>
+    <label><input type="radio" name="q4" value="c"> Al Pacino and Tom Sizemore</label>
+    <label><input type="radio" name="q4" value="d"> Robert De Niro and Jon Voight</label>
+    </div>
+    <div class="question">
+    <h3>5. In The Dark Knight (2008), what is the Joker's primary objective when he places two groups of people on separate ferries?</h3>
+    <label><input type="radio" name="q5" value="a"> Force them to choose which group survives</label>
+    <label><input type="radio" name="q5" value="b"> Prove that ordinary people will abandon morality under pressure</label>
+    <label><input type="radio" name="q5" value="c"> Test Batman's ability to save two groups simultaneously</label>
+    <label><input type="radio" name="q5" value="d"> Create a distraction to escape Gotham</label>
+    </div>
+    <div class="question">
+    <h3>6. In John Wick (2014), what is the significance of the gold coins used within the criminal underworld?</h3>
+    <label><input type="radio" name="q6" value="a"> They represent a fixed monetary exchange rate</label>
+    <label><input type="radio" name="q6" value="b"> They are used as a universal form of currency for services</label>
+    <label><input type="radio" name="q6" value="c"> They are exclusively used to purchase weapons</label>
+    <label><input type="radio" name="q6" value="d"> They represent membership in the High Table</label>
+    </div>
+    <div class="question">
+    <h3>7. “You talkin' to me?” In which film does this improvised mirror confrontation take place?</h3>
+    <label><input type="radio" name="q7" value="a"> The French Connection</label>
+    <label><input type="radio" name="q7" value="b"> Scarface</label>
+    <label><input type="radio" name="q7" value="c"> Taxi Driver</label>
+    <label><input type="radio" name="q7" value="d"> Pulp Fiction</label>
+    </div>
+    <div class="question">
+    <h3>8. Park Chan-wook's revenge films frequently use meticulously controlled compositions and unusual camera transitions. Which film established his international reputation as a master of revenge cinema?</h3>
+    <label><input type="radio" name="q8" value="a"> I Saw the Devil</label>
+    <label><input type="radio" name="q8" value="b"> The Man from Nowhere</label>
+    <label><input type="radio" name="q8" value="c"> The Chaser</label>
+    <label><input type="radio" name="q8" value="d"> Oldboy</label>
+    </div>
+    <div class="question">
+    <h3>9. Which recurring visual technique is strongly associated with Edgar Wright's action-comedy filmmaking, particularly in Hot Fuzz and Baby Driver?</h3>
+    <label><input type="radio" name="q9" value="a"> Extremely long static shots without dialogue</label>
+    <label><input type="radio" name="q9" value="b"> Constant use of handheld documentary footage</label>
+    <label><input type="radio" name="q9" value="c"> Exclusive reliance on slow-motion photography</label>
+    <label><input type="radio" name="q9" value="d"> Rapid, rhythmic montages synchronized with sound and music</label>
+    </div>
+    <div class="question">
+    <h3>10. Christopher Nolan repeatedly uses a particular narrative device across films such as Memento, Inception and Dunkirk. What is it?</h3>
+    <label><input type="radio" name="q10" value="a"> Stories told entirely in reverse chronological order</label>
+    <label><input type="radio" name="q10" value="b"> Repeated flashbacks narrated by a child</label>
+    <label><input type="radio" name="q10" value="c"> Nonlinear storytelling and overlapping timelines</label>
+    <label><input type="radio" name="q10" value="d"> Unreliable narrators</label>
+    </div>
+    <button onclick="checkAnswers('Action')">Submit</button>
+    <div class="result" id="result-Action"></div>
+</div>
+</section>
+
+
+<section id="Comedy">
+<h1>Comedy Quiz</h1>
+<div class="quiz-container">
+    <div class="question">
+        <h3>1. What kind of animal is "Shrek's" best friend Donkey?</h3>
+        <label><input type="radio" name="q11" value="a"> Horse</label>
+        <label><input type="radio" name="q11" value="b"> Dog</label>
+        <label><input type="radio" name="q11" value="c"> Donkey</label>
+        <label><input type="radio" name="q11" value="d"> Cat</label>
+    </div>
+    <div class="question">
+        <h3>2. Which comedy series is about a group of friends in New York?</h3>
+        <label><input type="radio" name="q12" value="a"> How I Met Your Mother</label>
+        <label><input type="radio" name="q12" value="b"> Parks & Recreation</label>
+        <label><input type="radio" name="q12" value="c"> The Office</label>
+        <label><input type="radio" name="q12" value="d"> Friends</label>
+    </div>
+    <div class="question">
+        <h3>3. What does the term "slapstick" comedy involve?</h3>
+        <label><input type="radio" name="q13" value="a"> Serious jokes</label>
+        <label><input type="radio" name="q13" value="b"> Musical numbers</label>
+        <label><input type="radio" name="q13" value="c"> Physical humor and pratfalls</label>
+        <label><input type="radio" name="q13" value="d"> Silent acting</label>
+    </div>
+    <div class="question">
+        <h3>4. In Wes Anderson's films, what is the purpose of his frequently used symmetrical compositions and precise camera movements?</h3>
+        <label><input type="radio" name="q14" value="a"> To create a documentary-like sense of realism.</label>
+        <label><input type="radio" name="q14" value="b"> To make scenes appear spontaneously filmed.</label>
+        <label><input type="radio" name="q14" value="c"> To establish a controlled, stylised visual world with theatrical precision.</label>
+        <label><input type="radio" name="q14" value="d"> To imitate traditional action-film cinematography.</label>
+    </div>
+    <div class="question">
+        <h3>5. Arrested Development is famous for its narration. What makes Ron Howard's narration particularly effective as a comedic device?</h3>
+        <label><input type="radio" name="q15" value="a"> It frequently contradicts the characters.</label>
+        <label><input type="radio" name="q15" value="b"> It is delivered by different characters.</label>
+        <label><input type="radio" name="q15" value="c"> It reveals future episode endings.</label>
+        <label><input type="radio" name="q15" value="d"> It replaces most character dialogue.</label>
+    </div>
+    <div class="question">
+        <h3>6. Barry, created by Alec Berg and Bill Hader, is known for an unusual tonal combination. What makes its comedy distinctive?</h3>
+        <label><input type="radio" name="q16" value="a"> It focuses entirely on Hollywood celebrity culture.</label>
+        <label><input type="radio" name="q16" value="b"> It relies on traditional sitcom misunderstandings.</label>
+        <label><input type="radio" name="q16" value="c"> It combines dark humour with psychological drama.</label>
+        <label><input type="radio" name="q16" value="d"> It uses musical performances as its main comedy device.</label>
+    </div>
+    <div class="question">
+        <h3>7. Which two comedy series use workplace environments to satirise professional incompetence and organisational dysfunction?</h3>
+        <label><input type="radio" name="q17" value="a"> Community and What We Do in the Shadows</label>
+        <label><input type="radio" name="q17" value="b"> The Office and Silicon Valley</label>
+        <label><input type="radio" name="q17" value="c"> Barry and The Good Place.</label>
+        <label><input type="radio" name="q17" value="d"> Fleabag and BoJack Horseman</label>
+    </div>
+    <div class="question">
+        <h3>8. Todd Phillips directed both The Hangover and Joker. What makes this pairing interesting from a directorial perspective?</h3>
+        <label><input type="radio" name="q18" value="a"> Both films rely on improvised ensemble comedy.</label>
+        <label><input type="radio" name="q18" value="b"> Both films are mockumentaries about celebrity culture.</label>
+        <label><input type="radio" name="q18" value="c"> Both films use identical narrative structures and comedic techniques.</label>
+        <label><input type="radio" name="q18" value="d"> Both films explore social outsiders through very different tonal approaches.</label>
+    </div>
+    <div class="question">
+        <h3>9. What is a recurring characteristic of the Safdie brothers' filmmaking in Good Time and Uncut Gems?</h3>
+        <label><input type="radio" name="q19" value="a"> Nonlinear narration and colourful fantasy sequences</label>
+        <label><input type="radio" name="q19" value="b"> Calm pacing, symmetrical compositions and restrained sound</label>
+        <label><input type="radio" name="q19" value="c"> Chaotic editing, intense sound design and escalating anxiety.</label>
+        <label><input type="radio" name="q19" value="d"> Musical interludes and exaggerated theatrical performances</label>
+    </div>
+    <div class="question">
+        <h3>10. What is a distinctive feature of Guy Ritchie's comedy-crime filmmaking in Snatch and Lock, Stock and Two Smoking Barrels?</h3>
+        <label><input type="radio" name="q20" value="a"> Nonlinear fantasy sequences and surreal visual symbolism.</label>
+        <label><input type="radio" name="q20" value="b"> Long observational takes and documentary-style interviews.</label>
+        <label><input type="radio" name="q20" value="c"> Interconnected criminal storylines, fast-paced editing and stylised dialogue.</label>
+        <label><input type="radio" name="q20" value="d"> Symmetrical framing and deliberately slow camera movements.</label>
+    </div>
+    <button onclick="checkAnswers('Comedy')">Submit</button>
+    <div class="result" id="result-Comedy"></div>
+</div>
+</section>
+
+
+<section id="Horror">
+<h1>Horror Quiz</h1>
+<div class="quiz-container">
+    <div class="question">
+        <h3>1. Which creature is famous for saying “I want to suck your blood”?</h3>
+        <label><input type="radio" name="q21" value="a"> Zombie</label>
+        <label><input type="radio" name="q21" value="b"> Vampire</label>
+        <label><input type="radio" name="q21" value="c"> Werewolf</label>
+        <label><input type="radio" name="q21" value="d"> Ghoul</label>
+    </div>
+    <div class="question">
+        <h3>2. What is a “jump scare” in horror movies?</h3>
+        <label><input type="radio" name="q22" value="a"> A slow suspenseful scene</label>
+        <label><input type="radio" name="q22" value="b"> A sudden loud noise or image meant to scare you</label>
+        <label><input type="radio" name="q22" value="c"> An energetic thriller scene</label>
+        <label><input type="radio" name="q22" value="d"> A funny scene</label>
+    </div>
+    <div class="question">
+        <h3>3. What’s the name of the clown in the movie “It”?</h3>
+        <label><input type="radio" name="q23" value="a"> Joker</label>
+        <label><input type="radio" name="q23" value="b"> Pennywise</label>
+        <label><input type="radio" name="q23" value="c"> Krusty Ring</label>
+        <label><input type="radio" name="q23" value="d"> Bozo</label>
+    </div>
+    <div class="question">
+        <h3>4. Which director is strongly associated with practical gore effects and body horror in films such as The Fly, Videodrome and The Brood?</h3>
+        <label><input type="radio" name="q24" value="a"> John Carpenter</label>
+        <label><input type="radio" name="q24" value="b"> Tobe Hooper</label>
+        <label><input type="radio" name="q24" value="c"> Wes Craven</label>
+        <label><input type="radio" name="q24" value="d"> David Cronenberg</label>
+    </div>
+    <div class="question">
+        <h3>5. The Final Destination franchise has a particularly unusual antagonist. What makes its central horror concept distinctive?</h3>
+        <label><input type="radio" name="q25" value="a"> A supernatural killer possesses different human bodies.</label>
+        <label><input type="radio" name="q25" value="b"> Death itself orchestrates elaborate accidents to reclaim survivors.</label>
+        <label><input type="radio" name="q25" value="c"> A group of spirits hunts people who enter abandoned buildings.</label>
+        <label><input type="radio" name="q25" value="d"> An ancient creature targets people who break a family curse.</label>
+    </div>
+    <div class="question">
+        <h3>6. Which horror series follows a group of women whose survival after a plane crash becomes increasingly disturbing as secrets from their past emerge?</h3>
+        <label><input type="radio" name="q26" value="a"> Yellowjackets</label>
+        <label><input type="radio" name="q26" value="b"> The Terror</label>
+        <label><input type="radio" name="q26" value="c"> Marianne</label>
+        <label><input type="radio" name="q26" value="d"> From</label>
+    </div>
+    <div class="question">
+        <h3>7. Which horror franchise introduced the fictional character Jigsaw, known for elaborate traps designed around moral tests?</h3>
+        <label><input type="radio" name="q27" value="a"> Hostel</label>
+        <label><input type="radio" name="q27" value="b"> Escape Room</label>
+        <label><input type="radio" name="q27" value="c"> Saw</label>
+        <label><input type="radio" name="q27" value="d"> The Human Centipede</label>
+    </div>
+    <div class="question">
+        <h3>8. Which film holds the record for the highest-grossing horror movie worldwide, according to Guinness World Records' January 2026 record?</h3>
+        <label><input type="radio" name="q28" value="a"> The Conjuring (2013)</label>
+        <label><input type="radio" name="q28" value="b"> It (2017)</label>
+        <label><input type="radio" name="q28" value="c"> Obsession (2026)</label>
+        <label><input type="radio" name="q28" value="d"> The Sixth Sense (1996)</label>
+    </div>
+    <div class="question">
+        <h3>9. Which horror film won the Oscar for Best Original Screenplay at the 90th Academy Awards (2018)?</h3>
+        <label><input type="radio" name="q29" value="a"> The Killing of a Sacred Deer (2017)</label>
+        <label><input type="radio" name="q29" value="b"> It (2017)</label>
+        <label><input type="radio" name="q29" value="c"> Get Out (2017)</label>
+        <label><input type="radio" name="q29" value="d"> Blade Runner 2049 (2017)</label>
+    </div>
+    <div class="question">
+        <h3>10. What is the name of the mysterious object at the centre of Obsession (2025)?</h3>
+        <label><input type="radio" name="q30" value="a"> The Black Mirror</label>
+        <label><input type="radio" name="q30" value="b"> Monkey's Paw</label>
+        <label><input type="radio" name="q30" value="c"> The One Wish Willow</label>
+        <label><input type="radio" name="q30" value="d"> The Devil's Coin</label>
+    </div>
+    <button onclick="checkAnswers('Horror')">Submit</button>
+    <div class="result" id="result-Horror"></div>
+</div>
+</section>
+
+
+<section id="Sci-Fi">
+<h1>Sci-Fi Quiz</h1>
+<div class="quiz-container">
+    <div class="question">
+        <h3>1. In Jurassic Park, which creatures are brought back to life using genetic science?</h3>
+        <label><input type="radio" name="q31" value="a"> Mammoths</label>
+        <label><input type="radio" name="q31" value="b"> Dinosaurs</label>
+        <label><input type="radio" name="q31" value="c"> Dragons</label>
+        <label><input type="radio" name="q31" value="d"> Cave Bears</label>
+    </div>
+    <div class="question">
+        <h3>2. In The Matrix, what does Morpheus offer Neo when presenting him with the two pills?</h3>
+        <label><input type="radio" name="q32" value="a"> A choice between becoming human and becoming a machine.</label>
+        <label><input type="radio" name="q32" value="b"> A choice between freedom and remaining in ignorance.</label>
+        <label><input type="radio" name="q32" value="c"> A choice between joining the resistance and fighting Agent Smith.</label>
+        <label><input type="radio" name="q32" value="d"> A choice between escaping the Matrix and destroying it.</label>
+    </div>
+    <div class="question">
+        <h3>3. What is the name of the parallel dimension in Stranger Things?</h3>
+        <label><input type="radio" name="q33" value="a"> The Dark World</label>
+        <label><input type="radio" name="q33" value="b"> The Shadow Realm</label>
+        <label><input type="radio" name="q33" value="c"> The Upside Down</label>
+        <label><input type="radio" name="q33" value="d"> Outer World</label>
+    </div>
+    <div class="question">
+        <h3>4. Which science-fiction film features a protagonist who experiences time in a nonlinear way after encountering an alien language?</h3>
+        <label><input type="radio" name="q34" value="a"> Ad Astra (2020)</label>
+        <label><input type="radio" name="q34" value="b"> Arrival (2016)</label>
+        <label><input type="radio" name="q34" value="c"> Contact (1997)</label>
+        <label><input type="radio" name="q34" value="d"> Annihilation (2018)</label>
+    </div>
+    <div class="question">
+        <h3>5. Which filmmaker is particularly associated with nonlinear storytelling, practical filmmaking techniques and stories involving time, memory and perception?</h3>
+        <label><input type="radio" name="q35" value="a"> Denis Villeneuve</label>
+        <label><input type="radio" name="q35" value="b"> Christopher Nolan</label>
+        <label><input type="radio" name="q35" value="c"> Alex Garland</label>
+        <label><input type="radio" name="q35" value="d"> Duncan Jones</label>
+    </div>
+    <div class="question">
+        <h3>6. Which director is known for using practical effects, large-scale miniatures and groundbreaking visual techniques in films such as 2001: A Space Odyssey?</h3>
+        <label><input type="radio" name="q36" value="a"> Steven Spielberg</label>
+        <label><input type="radio" name="q36" value="b"> Ridley Scott</label>
+        <label><input type="radio" name="q36" value="c"> George Lucas</label>
+        <label><input type="radio" name="q36" value="d"> Stanley Kubrick</label>
+    </div>
+    <div class="question">
+        <h3>7. What philosophical idea is strongly reflected in Dark through its repeating cycles and interconnected events?</h3>
+        <label><input type="radio" name="q37" value="a"> The multiverse interpretation of quantum mechanics</label>
+        <label><input type="radio" name="q37" value="b"> Eternal recurrence and determinism</label>
+        <label><input type="radio" name="q37" value="c"> The technological singularity</label>
+        <label><input type="radio" name="q37" value="d"> The simulation hypothesis</label>
+    </div>
+    <div class="question">
+        <h3>8. What is a major thematic connection shared by Dark, Mr. Robot and Black Mirror?</h3>
+        <label><input type="radio" name="q38" value="a"> The conflict between individual identity, reality and forces beyond personal control</label>
+        <label><input type="radio" name="q38" value="b"> The consequences of humanity colonising other planets</label>
+        <label><input type="radio" name="q38" value="c"> The development of artificial intelligence into independent societies</label>
+        <label><input type="radio" name="q38" value="d"> The discovery of extraterrestrial life and its effect on civilisation</label>
+    </div>
+    <div class="question">
+        <h3>9. Match each movie with its organisation.</h3>
+        <label><input type="radio" name="q39" value="a"> TThe Matrix-Skynet | Avatar-Weyland-Yutani | Star Wars-Galactic Empire | The Hunger Games-District 13</label>
+        <label><input type="radio" name="q39" value="b"> The Matrix-Zion | Avatar-RDA | Star Wars-Rebel Alliance | The Hunger Games-Capitol</label>
+        <label><input type="radio" name="q39" value="c"> The Matrix-Zion | Avatar-Weyland-Yutani | Star Wars-Rebel Alliance | The Hunger Games-Capitol</label>
+        <label><input type="radio" name="q39" value="d"> The Matrix-Resistance | Avatar-RDA | Star Wars-First Order | The Hunger Games-District 13</label>
+    </div>
+    <div class="question">
+        <h3>10. Select the option in which all four movies or series are correctly matched with their time-related concept.</h3>
+        <label><input type="radio" name="q40" value="a"> Tenet-Time loop after death | Back to the Future-DeLorean time machine | Groundhog Day-Time Dilation | Edge of Tomorrow-Time inversion</label>
+        <label><input type="radio" name="q40" value="b"> Tenet-Time inversion | Back to the Future-Wormhole travel | Groundhog Day-Time Dilation | Edge of Tomorrow-Wormhole travel</label>
+        <label><input type="radio" name="q40" value="c"> Tenet-Time inversion | Back to the Future-DeLorean time machine | Groundhog Day-Repeating Day | Edge of Tomorrow-Repeating battlefield timeline</label>
+        <label><input type="radio" name="q40" value="d"> Tenet-Quantum time machine | Back to the Future-Wormhole travel | Groundhog Day-Time Dilation | Edge of Tomorrow-Parallel universes
+</label>
+    </div>
+    <button onclick="checkAnswers('Sci-Fi')">Submit</button>
+    <div class="result" id="result-Sci-Fi"></div>
+</div>
+</section>
+
+
+<section id="Romance">
+<h1>Romance Quiz</h1>
+<div class="quiz-container">
+    <div class="question">
+        <h3>1. Which movie features a romance on a sinking ship?</h3>
+        <label><input type="radio" name="q41" value="a"> Pearl Harbour</label>
+        <label><input type="radio" name="q41" value="b"> Titanic</label>
+        <label><input type="radio" name="q41" value="c"> Jaws</label>
+        <label><input type="radio" name="q41" value="d"> The Poseidon Adventure</label>
+    </div>
+    <div class="question">
+        <h3>2. Which couple is famous for meeting at a ball and losing a glass slipper?</h3>
+        <label><input type="radio" name="q42" value="a"> Belle and Beast</label>
+        <label><input type="radio" name="q42" value="b"> Cinderella and Prince Charming</label>
+        <label><input type="radio" name="q42" value="c"> Snow White and Prince</label>
+        <label><input type="radio" name="q42" value="d"> Ariel and Eric</label>
+    </div>
+    <div class="question">
+        <h3>3. Which movie features a love story set during World War II?</h3>
+        <label><input type="radio" name="q43" value="a"> Casablanca</label>
+        <label><input type="radio" name="q43" value="b"> The Great Gatsby</label>
+        <label><input type="radio" name="q43" value="c"> Saving Private Ryan</label>
+        <label><input type="radio" name="q43" value="d"> The Avengers</label>
+    </div>
+    <div class="question">
+        <h3>4. In 500 Days of Summer, what does the film famously clarify about its story?</h3>
+        <label><input type="radio" name="q44" value="a"> It is based on a true story</label>
+        <label><input type="radio" name="q44" value="b"> It is not a love story</label>
+        <label><input type="radio" name="q44" value="c"> It follows two people across different timelines</label>
+        <label><input type="radio" name="q44" value="d"> It is told entirely from Summer's perspective</label>
+    </div>
+    <div class="question">
+        <h3>5. In La La Land, what are Mia and Sebastian both trying to achieve?</h3>
+        <label><input type="radio" name="q45" value="a"> Build a successful restaurant</label>
+        <label><input type="radio" name="q45" value="b"> Become famous actors</label>
+        <label><input type="radio" name="q45" value="c"> Pursue their individual artistic ambitions</label>
+        <label><input type="radio" name="q45" value="d"> Move to Paris together</label>
+    </div>
+    <div class="question">
+        <h3>6. Which of these films features a romance between a human woman and an artificial intelligence operating system?</h3>
+        <label><input type="radio" name="q46" value="a"> Ghost in the Shell</label>
+        <label><input type="radio" name="q46" value="b"> Blade Runner 2049</label>
+        <label><input type="radio" name="q46" value="c"> Her</label>
+        <label><input type="radio" name="q46" value="d"> Ex Machina</label>
+    </div>
+    <div class="question">
+        <h3>7. Which of these films was directed by Sofia Coppola and explores the unexpected connection between two lonely Americans in Tokyo?</h3>
+        <label><input type="radio" name="q47" value="a"> Lost in Translation</label>
+        <label><input type="radio" name="q47" value="b"> Past Lives</label>
+        <label><input type="radio" name="q47" value="c"> Blue Valentine</label>
+        <label><input type="radio" name="q47" value="d"> The Notebook</label>
+    </div>
+    <div class="question">
+        <h3>8. In The Curious Case of Benjamin Button, what unusual condition shapes Benjamin's life and relationship with Daisy?</h3>
+        <label><input type="radio" name="q48" value="a"> He can stop time whenever he wants</label>
+        <label><input type="radio" name="q48" value="b"> He is born old and ages backwards</label>
+        <label><input type="radio" name="q48" value="c"> He ages normally but loses his memories</label>
+        <label><input type="radio" name="q48" value="d"> He is born old and ages backwards</label>
+    </div>
+    <div class="question">
+        <h3>9. Which two series are particularly associated with dark comedy and unconventional teenage relationships?</h3>
+        <label><input type="radio" name="q49" value="a"> Friends and The Big Bang Theory</label>
+        <label><input type="radio" name="q49" value="b"> The End of the F***ing World and Wayne</label>
+        <label><input type="radio" name="q49" value="c"> Bridgerton and The Crown</label>
+        <label><input type="radio" name="q49" value="d"> Outlander and The Tudors</label>
+    </div>
+    <div class="question">
+        <h3>10. Which TV series became famous for telling the story of a man's search for his future wife through flashbacks narrated to his children?</h3>
+        <label><input type="radio" name="q50" value="a"> New Girl</label>
+        <label><input type="radio" name="q50" value="b"> The Big Bang Theory</label>
+        <label><input type="radio" name="q50" value="c"> How I Met Your Mother</label>
+        <label><input type="radio" name="q50" value="d"> Friends</label>
+    </div>
+    <button onclick="checkAnswers('Romance')">Submit</button>
+    <div class="result" id="result-Romance"></div>
+</div>
+</section>
+
+
+<section id="Fantasy">
+<h1>Fantasy Quiz</h1>
+<div class="quiz-container">
+    <div class="question">
+        <h3>1. In "Harry Potter," what house is Harry sorted into?</h3>
+        <label><input type="radio" name="q51" value="a"> Slytherin</label>
+        <label><input type="radio" name="q51" value="b"> Gryffindor</label>
+        <label><input type="radio" name="q51" value="c"> Hufflepuff</label>
+        <label><input type="radio" name="q51" value="d"> Ravenclaw </label>
+    </div>
+    <div class="question">
+        <h3>2. In "Game of Thrones," what is the name of the continent where most of the story happens?</h3>
+        <label><input type="radio" name="q52" value="a"> Middle-earth</label>
+        <label><input type="radio" name="q52" value="b"> Narnia</label>
+        <label><input type="radio" name="q52" value="c"> Essos</label>
+        <label><input type="radio" name="q52" value="d"> Westeros</label>
+    </div>
+    <div class="question">
+        <h3>3. Who is the author of "The Lord of the Rings"?</h3>
+        <label><input type="radio" name="q53" value="a"> C.S. Lewis</label>
+        <label><input type="radio" name="q53" value="b"> J.R.R. Tolkien</label>
+        <label><input type="radio" name="q53" value="c"> George R.R. Martin</label>
+        <label><input type="radio" name="q53" value="d"> J.K. Rowling</label>
+    </div>
+    <div class="question">
+        <h3>4. Which of these series features a world where people can be born with the ability to control elements through a practice known as bending?</h3>
+        <label><input type="radio" name="q54" value="a"> Shadow and Bone</label>
+        <label><input type="radio" name="q54" value="b"> His Dark Materials</label>
+        <label><input type="radio" name="q54" value="c"> Avatar: The Last Airbender</label>
+        <label><input type="radio" name="q54" value="d"> The Witcher</label>
+    </div>
+    <div class="question">
+        <h3>5. Which actor played both Gollum in The Lord of the Rings and Caesar in Planet of the Apes?</h3>
+        <label><input type="radio" name="q55" value="a"> Benedict Cumberbatch</label>
+        <label><input type="radio" name="q55" value="b"> Doug Jones</label>
+        <label><input type="radio" name="q55" value="c"> Andy Serkis</label>
+        <label><input type="radio" name="q55" value="d"> Toby Kebbell</label>
+    </div>
+    <div class="question">
+        <h3>6. In Greek mythology, which creature is traditionally associated with turning people to stone?</h3>
+        <label><input type="radio" name="q56" value="a"> Cerberus</label>
+        <label><input type="radio" name="q56" value="b"> Chimera</label>
+        <label><input type="radio" name="q56" value="c"> Minotaur</label>
+        <label><input type="radio" name="q56" value="d"> Medusa</label>
+    </div>
+    <div class="question">
+        <h3>7. Which option correctly matches all four magical objects to their franchises?</h3>
+        <label><input type="radio" name="q57" value="a"> Elder Wand - LOTR | One Ring - The Hobbit | Golden Compass - Narnia | Excalibur - Harry Potter</label>
+        <label><input type="radio" name="q57" value="b"> Elder Wand - The Witcher | One Ring - Harry Potter | Golden Compass - Arthurian Legend | Excalibur - Narnia</label>
+        <label><input type="radio" name="q57" value="c"> Elder Wand - Harry Potter | One Ring - LOTR | Golden Compass - His Dark Materials | Excalibur - Arthurian Legend</label>
+        <label><input type="radio" name="q57" value="d"> Elder Wand - Narnia | One Ring - LOTR | Golden Compass - Harry Potter | Excalibur - The Witcher</label>
+    </div>
+    <div class="question">
+        <h3>8. Which option correctly matches the fantasy franchises with the number of films in their original main theatrical series?</h3>
+        <label><input type="radio" name="q58" value="a"> Harry Potter - 8 | The Lord of the Rings - 4 | The Hobbit - 2 | Fantastic Beasts - 3</label>
+        <label><input type="radio" name="q58" value="b"> Harry Potter - 9 | The Lord of the Rings - 3 | The Hobbit - 4 | Fantastic Beasts - 2</label>
+        <label><input type="radio" name="q58" value="c"> Harry Potter - 7 | The Lord of the Rings - 4 | The Hobbit - 3 | Fantastic Beasts - 4</label>
+        <label><input type="radio" name="q58" value="d"> Harry Potter - 8 | The Lord of the Rings - 3 | The Hobbit - 3 | Fantastic Beasts - 3</label>
+    </div>
+    <div class="question">
+        <h3>9. In Attack on Titan, what makes Eren Yeager's pursuit of freedom philosophically contradictory?</h3>
+        <label><input type="radio" name="q59" value="a"> His search for freedom leads him to believe that humanity can only be safe by erasing its own memories and starting over.</label>
+        <label><input type="radio" name="q59" value="b"> His attempt to secure freedom for himself and his people leads him to deny freedom and life to countless others.</label>
+        <label><input type="radio" name="q59" value="c"> His fight for liberty eventually convinces him that ordinary people are better off giving up their choices to a single ruler.</label>
+        <label><input type="radio" name="q59" value="d"> His desire to break free from the walls pushes him to join the outside nations and turn against his own homeland.</label>
+    </div>
+    <div class="question">
+        <h3>10. In Kung Fu Panda (2008), what core truth about control does Master Oogway teach Master Shifu under the peach tree?</h3>
+        <label><input type="radio" name="q60" value="a"> Destiny only favors warriors who completely abandon their past mistakes and start over from nothing.</label>
+        <label><input type="radio" name="q60" value="b"> Attempting to force outcomes out of fear often brings about the exact disaster you are trying to avoid.</label>
+        <label><input type="radio" name="q60" value="c"> True masters must prepare for every possible threat so that unexpected events can never disturb their peace.</label>
+        <label><input type="radio" name="q60" value="d"> Protecting the future requires sacrificing personal attachments to anyone who shows signs of pride.</label>
+    </div>
+    <button onclick="checkAnswers('Fantasy')">Submit</button>
+    <div class="result" id="result-Fantasy"></div>
+</div>
+</section>
+
+<button onclick="scrollToTop()" id="scrollBtn">⬆</button>
+
+<script>
+
+const scrollBtn = document.getElementById("scrollBtn");
+window.onscroll = () => {
+    if(document.body.scrollTop>200 || document.documentElement.scrollTop>200){
+        scrollBtn.classList.add("show");
+    } else {
+        scrollBtn.classList.remove("show");
+    }
+};
+function scrollToTop(){ window.scrollTo({top:0, behavior:'smooth'}); }
+
+
+const quizAnswers = {
+    Action: { q1:"b", q2:"c", q3:"b", q4:"a", q5:"b", q6:"b", q7:"c", q8:"d", q9:"d", q10:"c" },
+    Comedy: { q11:"c", q12:"d", q13:"c", q14:"c", q15:"a", q16:"c", q17:"b", q18:"d", q19:"c", q20:"c" },
+    Horror: { q21:"b", q22:"b", q23:"b", q24:"d", q25:"b", q26:"a", q27:"c", q28:"b", q29:"c", q30:"c" },
+    "Sci-Fi": { q31:"b", q32:"b", q33:"c", q34:"b", q35:"b", q36:"d", q37:"b", q38:"a", q39:"b", q40:"c" },
+    Romance: { q41:"b", q42:"b", q43:"a", q44:"b", q45:"c", q46:"c", q47:"a", q48:"d", q49:"b", q50:"c" },
+    Fantasy: { q51:"b", q52:"d", q53:"b", q54:"c", q55:"c", q56:"d", q57:"c", q58:"d", q59:"b", q60:"b" }
+};
+
+function checkAnswers(section){
+    const answers = quizAnswers[section];
+    let score = 0;
+    const total = Object.keys(answers).length;
+
+    for (const q in answers) {
+        const correctValue = answers[q];
+        const options = document.querySelectorAll(`input[name="${q}"]`);
+        const selected = document.querySelector(`input[name="${q}"]:checked`);
+
+        // Clear any previous feedback for this question.
+        options.forEach(input => {
+            const label = input.closest("label");
+            if (label) {
+                label.classList.remove("answer-correct", "answer-incorrect");
+            }
+        });
+
+        // Always reveal the correct option in green.
+        const correctInput = document.querySelector(
+            `input[name="${q}"][value="${correctValue}"]`
+        );
+        if (correctInput && correctInput.closest("label")) {
+            correctInput.closest("label").classList.add("answer-correct");
+        }
+
+        if (selected && selected.value === correctValue) {
+            score++;
+        } else if (selected && selected.closest("label")) {
+            // A selected wrong option is red; the correct option remains green.
+            selected.closest("label").classList.remove("answer-correct");
+            selected.closest("label").classList.add("answer-incorrect");
+        }
+    }
+
+    document.getElementById("scoreMessage").textContent =
+        `You scored ${score} out of ${total}`;
+
+    document.getElementById("scoreModal").classList.add("show");
+    document.body.style.overflow = "hidden";
+}
+
+function closeScoreModal(){
+    document.getElementById("scoreModal").classList.remove("show");
+    document.body.style.overflow = "";
+}
+
+// Close the score pop-up if the user clicks the dark background.
+document.getElementById("scoreModal").addEventListener("click", function(event){
+    if (event.target === this) closeScoreModal();
+});
+
+// Allow the Escape key to close the score pop-up.
+document.addEventListener("keydown", function(event){
+    if (event.key === "Escape") closeScoreModal();
+});
+</script>
+
+
+
+<div id="scoreModal" role="dialog" aria-modal="true" aria-labelledby="scoreTitle">
+    <div class="score-modal-content">
+        <h2 id="scoreTitle">Quiz Results</h2>
+        <p id="scoreMessage"></p>
+        <button type="button" onclick="closeScoreModal()">Close</button>
+    </div>
+</div>
+
+<!-- CINEIQ Footer -->
+<footer class="footer">
+
+    <div class="footer-container">
+
+        <!-- About -->
+        <div class="footer-section">
+            <h3>CINEIQ</h3>
+            <p>
+                CINEIQ is your destination for movie trivia,
+                exciting quizzes, and cinematic challenges.
+                Test your movie knowledge, compete with friends,
+                and prove you're the ultimate cinephile.
+            </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="n1.html">Home</a></li>
+                <li><a href="n22.html">Genres</a></li>
+                <li><a href="n333.html">Quizzes</a></li>
+                <li><a href="n8.html">Leaderboard</a></li>
+                <li><a href="n9.html">About</a></li>
+                <li><a href="n7.html">Contact</a></li>
+            </ul>
+        </div>
+
+        <!-- Legal -->
+        <div class="footer-section">
+            <h3>Legal</h3>
+            <ul>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms & Conditions</a></li>
+                <li><a href="#">Cookie Policy</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-section">
+            <h3>Contact Us</h3>
+            <p>Email: info@movietriviahub.com</p>
+            <p>Phone: +94 77 805 2038</p>
+        </div>
+
+    </div>
+
+    <hr>
+
+    <div class="footer-bottom">
+        &copy; 2026 CINEIQ. All Rights Reserved.
+    </div>
+
+</footer>
+
+</body>
+</html>
